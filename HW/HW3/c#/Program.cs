@@ -100,7 +100,7 @@ class Programm
         coeffs = [];
         Console.WriteLine("Введите сколько будет коэффицентов");
         int q= int.Parse(Console.ReadLine());
-
+        if (q >0){
         for (int i=0; i!=q; i++)
         {
             Console.WriteLine("Введите элемент №" + i);
@@ -108,8 +108,11 @@ class Programm
             coeffs[coeffs.Length - 1] = Convert.ToDouble(Console.ReadLine());
         }
         Polynomia z = new Polynomia(coeffs);
-
         Console.WriteLine("При значениях введеных вами:");
-        Console.WriteLine(z);
+        Console.WriteLine(z);}
+        else 
+        {
+            Console.WriteLine("Вы ввели " + q +" при таком колличестве коефицентов программа выводит пустоту, пожалуйста вводите числа > 0");
+        }
     }
 }
