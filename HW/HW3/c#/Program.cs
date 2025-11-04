@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Reflection.Emit;
 using System.Security.Permissions;
 class Polynomia{
     private double[] coefs;
@@ -28,18 +29,57 @@ class Polynomia{
                 switch (i)
                 {
                     case 0:
-
                         if(i!=coefs.Length && coefs[i+1]<0){z+= coefs[i] + " - ";}
-                        else{z+=coefs[i] + " + ";}
+                        else{z+=coefs[i];}
                         break;
-                    case 1:                        
-                        if(i!=coefs.Length && coefs[i+1]<0){z+= coefs[i] + "x"+" - ";}
-                        else{z+=coefs[i] +"x" + " + ";}
+                    case 1:                    
+                        if (coefs[i-1]!=0){
+                            if (coefs[i] <0 ){    
+                                if(i!=coefs.Length && coefs[i+1]<0){z+= Math.Abs(coefs[i]) + "x"+" - ";}
+                                else{z+=Math.Abs(coefs[i]) +"x";}
+                                }
+                            else{
+                                if(i!=coefs.Length && coefs[i+1]<0){z+=" + " + coefs[i] + "x"+" - ";}
+                                else{z+=" + " + coefs[i] +"x";}
+                                }
+                        }
+                        else{
+                            if (coefs[i] <0 ){    
+                                if(i!=coefs.Length && coefs[i+1]<0){z+=" - "+ Math.Abs(coefs[i]) + "x"+" - ";}
+                                else{z+=" - "+ Math.Abs(coefs[i]) +"x";}
+                                }
+                            else{
+                                if(i!=coefs.Length && coefs[i+1]<0){z+=" + " + coefs[i] + "x"+" - ";}
+                                else{z+=" + " + coefs[i] +"x";}
+                                }
+                        }
                         break;
-                    default:                   
-                        if(i!=coefs.Length-1){if(i!=coefs.Length-1 && coefs[i+1]<0){z+= coefs[i] +"x^"+ i + " - ";}
-                        else{z+= coefs[i] +"x^"+ i + " + ";}}
-                        else{z+= coefs[i] +"x^"+ i;}
+                    default:
+                        if (coefs[i-1]!=0){      
+                            if(coefs[i]<0){           
+                                if(i!=coefs.Length-1 && coefs[i+1]<0){z+=Math.Abs(coefs[i]) +"x^"+ i + " - ";}
+                                else{z+= Math.Abs(coefs[i]) +"x^"+ i;}
+                            }
+                            else
+                            {
+                                if(i!=coefs.Length-1 && coefs[i+1]<0){z+=" + " + coefs[i] +"x^"+ i + " - ";}
+                                else{z+= " + " + coefs[i] +"x^"+ i;}
+                            }
+                        }
+                        else
+                        {
+                            if (coefs[i] < 0)
+                            {
+                                if(i!=coefs.Length-1 && coefs[i+1]<0){z+=" - "+ Math.Abs(coefs[i]) +"x^"+ i + " - ";}
+                                else{z+=" - "+ Math.Abs(coefs[i]) +"x^"+ i;}
+                            }
+
+                            else
+                            {
+                                if(i!=coefs.Length-1 && coefs[i+1]<0){z+=" + " + coefs[i] +"x^"+ i + " - ";}
+                                else{z+= " + " + coefs[i] +"x^"+ i;}
+                            }
+                        }
                         break;
                 }
             }
