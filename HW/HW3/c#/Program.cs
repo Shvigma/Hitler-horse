@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Reflection.Emit;
 using System.Security.Permissions;
 using System.Text;
+using System.Security.Cryptography.X509Certificates;
 class Polynomia{
     private double[] coefs;
     private int degree;
@@ -163,7 +164,7 @@ class Programm
         Console.WriteLine("Введите коэффицент для умножения");
         if (n == 1)
         {
-            Polynomia v = p * Convert.ToDouble(Console.ReadLine());
+        Polynomia v = p * Convert.ToDouble(Console.ReadLine());
         Console.WriteLine("После умножения на ваш коэффицент получился такой многочлен");
         Console.WriteLine(v);
         }
@@ -177,18 +178,14 @@ class Programm
         {
             Console.WriteLine("Вы ввели не правильное n");
         }
-        
+
         }
         else 
-        {
+        { 
             Console.WriteLine("Вы ввели " + q +" при таком колличестве коефицентов программа выводит пустоту, пожалуйста вводите числа > 0");
         }
 
         
-        Console.WriteLine("Введите коэффицент для умножения");
-        Polynomia f = p * Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("После умножения на ваш коэффицент получился такой многочлен");
-        Console.WriteLine(f);
 
     }
 }
