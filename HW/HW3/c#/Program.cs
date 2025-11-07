@@ -7,6 +7,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection.Emit;
 using System.Security.Permissions;
+using System.Text;
 class Polynomia{
     private double[] coefs;
     private int degree;
@@ -115,11 +116,24 @@ class Polynomia{
 
         return new Polynomia(coefs);
     }
+    public static Polynomia operator * (Polynomia obj, double k)
+    {   
+        int g = obj.coefs.Length;
+        double[] coefs= new double[3];
+        Array.Resize(ref coefs, g);
+        for(int i = 0 ; i<g; i++)
+        {
+            coefs[i]=obj.coefs[i]*k;
+        }
+        return new Polynomia(coefs);
+    }
 } 
 class Programm
 {
     static void Main(string[] args)
     {   
+        Console.OutputEncoding = Encoding.UTF8;
+        Console.InputEncoding = Encoding.UTF8;
         double[] coeffs = new double[] {1.0, 0.0, 2.0 };
         Polynomia p = new Polynomia(coeffs);
         Console.WriteLine("При дефолтных значениях [1.0, 0.0, 2.0]");
@@ -140,15 +154,41 @@ class Programm
         Polynomia z = new Polynomia(coffs);
         Console.WriteLine("При значениях введеных вами:");
         Console.WriteLine(z);
+        
         Polynomia l = p + z;
         Console.WriteLine("Если сложить 2 полученных многочлена, то получится");
         Console.WriteLine(l);
+        Console.WriteLine("Введите элементы какого многочлена вы хотите умножить: 1 - Дефолтный многочлен, 2 - Многочлен заданый вами");
+        int n = int.Parse(Console.ReadLine());
+        Console.WriteLine("Введите коэффицент для умножения");
+        if (n == 1)
+        {
+            Polynomia v = p * Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine("После умножения на ваш коэффицент получился такой многочлен");
+        Console.WriteLine(v);
+        }
+        else if (n == 2)
+        {
+            Polynomia v = z * Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("После умножения на ваш коэффицент получился такой многочлен");
+            Console.WriteLine(v);
+        }
+        else
+        {
+            Console.WriteLine("Вы ввели не правильное n");
+        }
+        
         }
         else 
         {
             Console.WriteLine("Вы ввели " + q +" при таком колличестве коефицентов программа выводит пустоту, пожалуйста вводите числа > 0");
         }
 
+        
+        Console.WriteLine("Введите коэффицент для умножения");
+        Polynomia f = p * Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine("После умножения на ваш коэффицент получился такой многочлен");
+        Console.WriteLine(f);
 
     }
 }
