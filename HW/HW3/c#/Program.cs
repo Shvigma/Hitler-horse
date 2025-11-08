@@ -183,6 +183,11 @@ class Programm
         else 
         { 
             Console.WriteLine("Вы ввели " + q +" при таком колличестве коефицентов программа выводит пустоту, пожалуйста вводите числа > 0");
+            Console.WriteLine();
+            Console.WriteLine("Введите коэффицент для умножения 1 многочлена");
+            Polynomia v = p * Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("После умножения на ваш коэффицент получился такой многочлен");
+            Console.WriteLine(v);
         }
 
         
